@@ -18,20 +18,16 @@
 <div class="line">
 	<input id="num2" type="number" />
 </div>
-<button id="startBtn">Addition</button>
+
+<div id="process">
+	<button name="+">Addition</button>
+	<button name="*">Multiplication</button>
+</div>
 
 <div id="result"></div>
 <!-- /VIEW -->
 
 
-<script>
-	dab.event('#startBtn', 'click', e => {
-		dab.setHtml( '#result',
-			dab.intVal('#num1') + dab.intVal('#num2')
-		);
-	})
-</script>
-
-
+<script src="indexScript.js"></script>
 </body>
 </html>
