@@ -12,19 +12,21 @@
 
 
 <!-- VIEW -->
-<div class="line">
-	<input id="num1" type="number" />
-</div>
-<div class="line">
-	<input id="num2" type="number" />
-</div>
+<form id="calculator-form">
+	<div class="line">
+		<input name="num1" id="num1" type="number"/>
+	</div>
+	<div class="line">
+		<input name="num2" id="num2" type="number"/>
+	</div>
 
-<div id="process">
-	<button name="+">Addition</button>
-	<button name="*">Multiplication</button>
-</div>
+	<div id="button-wrapper">
+		<button id="addition" name="submit-btn" value="addition">Addition</button>
+		<button id="multiplication" name="submit-btn" value="multiplication">Multiplication</button>
+	</div>
 
-<div id="result"></div>
+	<div id="result"></div>
+</form>
 <!-- /VIEW -->
 
 
