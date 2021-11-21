@@ -1,19 +1,18 @@
+dab('#process button').click((btn, e) => {
 
-
-dab('#process button').click(function(){
-
-    if(this.name === '+'){
+    if(btn.name === '+'){
 
         dab('#result').html(
             dab('#num1').valInt() + dab('#num2').valInt()
-        );
+        )
 
-    } else if(this.name === "*"){
+    } else if(btn.name === "*"){
 
         dab('#result').html(
             dab('#num1').valInt() * dab('#num2').valInt()
-        );
+        )
 
     }
+
 
 });

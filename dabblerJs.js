@@ -1,121 +1,101 @@
-function dab(selector = null){ const O = {};
+
+class dabblerJs
+{
+
+    selectedItems
 
 
+    constructor(selector){
 
-
-    if(selector){
-        O.dom = document.querySelectorAll(selector);
-    }
-
-
-
-
-    O.get = function () {
-
-        if (O.dom.length > 0) {
-
-            const array = []
-            O.dom.forEach(item => {
-                array.push(item)
-            })
-
-            if (O.dom.length === 1) {
-                return array[0]
-            }
-
-            return array
-        }
-
-        return null;
+        this.selectedItems = document.querySelectorAll(selector);
 
     }
 
 
-
-
-    O.getFirst = function (){
-
-        let dom = null;
-
-        O.dom.forEach(item => {
-            dom = item;
-        });
-
-        return dom;
-
+    get(){
+        return this.selectedItems[0]
     }
 
 
+    gets(){
+        return this.selectedItems
+    }
 
-
-    O.click = function (callback = ()=>{}){
-        O.dom.forEach(function (item){
-            item.addEventListener('click', callback);
-        });
+    toArray(){
+        return Array.from(this.selectedItems)
     }
 
 
+    map(callback){
+        return this.toArray().map(callback);
+    }
 
 
-    O.html = function (html = null){
+    html(html = null){
 
         if(html === null){
-            let domFirst = O.getFirst();
-            return domFirst.innerHTML;
+            return this.selectedItems[0].innerHTML;
         }
 
-        O.dom.forEach(function (item){
-            item.innerHTML = html;
-        });
+        this.selectedItems.forEach(item => {
+            item.innerHTML = html
+        })
 
+        return this;
     }
 
 
-
-
-    O.val = function (value = null){
+    val(value = null){
 
         if(value === null){
-            let domFirst = this.getFirst();
-            return domFirst.value;
+            return this.selectedItems[0].value
         }
 
-        O.dom.forEach(function (item){
-            item.value = value;
-        });
+        this.selectedItems.forEach(item => {
+            item.value = value
+        })
+
+        return this;
     }
 
 
-
-
-    O.getVal = function(type){
-
-        let domFirst = this.getFirst();
-
-        switch (type){
-            case "int"  : return parseInt(domFirst.value)
-            case "float": return parseFloat(domFirst.value)
-            default     : return domFirst.value
+    valInt(defValue = 0){
+        let value = parseInt(this.selectedItems[0].value);
+        if(!Number.isInteger(value)){
+            return defValue;
         }
+        return value;
+    }
 
+
+    valFloat(defValue = 0.0){
+        let value = parseFloat(this.selectedItems[0].value);
+        if(typeof value !== "number"){
+            return defValue;
+        }
+        return value;
+    }
+
+
+    click(callback){
+        this.selectedItems.forEach(item => {
+            item.addEventListener('click', function(e){
+                callback(this, e)
+            });
+        })
+
+        return this;
     }
 
 
 
 
-    O.valInt = function(){
-        return O.getVal('int');
-    }
+
+}
 
 
 
 
-    O.valFloat = function (){
-        return O.getVal('float');
-    }
-
-
-
-
-    return O;
+function dab(selector){
+    return new dabblerJs(selector);
 }
