@@ -146,12 +146,11 @@ class dabblerDom {
 
         })
 
-
         return this;
     }
 
 
-    submitByBtnPreventDef(callback){
+    submitByBtnPreDef(callback){
 
         this.submitByBtn((e, form, formData) => {
             e.preventDefault();

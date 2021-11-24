@@ -21,7 +21,7 @@ For the browser of course.
     </form>
 
 ### JAVASCRIPT
-    dab('#calculator-form').submitByBtnPreventDef((e, form, formData) => {
+    dab('#calculator-form').submitByBtnPreDef((e, form, formData) => {
     
         dab('#process-icon').html(form.submitBtn.innerHTML)
     
