@@ -1,10 +1,10 @@
 // QUICK SELECTORS --------------------------------------------------------------------------------------------------- :
-function docQuery(selector){
+function docSelect(selector){
     return document.querySelector(selector)
 }
 
 
-function docQueryAll(selector){
+function docSelects(selector){
     return document.querySelectorAll(selector)
 }
 
@@ -12,11 +12,6 @@ function docQueryAll(selector){
 function docId(id){
     return document.getElementById(id);
 }
-// QUICK SELECTORS -------------------------------------------------------------------------------------------------- //
-
-
-
-
 
 
 
@@ -39,8 +34,12 @@ function randomAdvance(length, type = "default"){
     let value = '';
 
     let numericChars     = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let stringLowerChars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    let stringUpperChars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    let stringLowerChars = [
+        'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+    ];
+    let stringUpperChars = [
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+    ];
 
     let useChars = [];
 
@@ -146,4 +145,3 @@ function encodeHTMLEntities(text) {
     textArea.innerText = text;
     return textArea.innerHTML;
 }
-// TOOLS FUNCTIONS -------------------------------------------------------------------------------------------------- //
