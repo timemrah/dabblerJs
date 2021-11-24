@@ -37,3 +37,53 @@ For the browser of course.
         }
     
     })
+
+<br />
+
+## DOCUMENTATION
+<br />
+
+### getElement
+If you need a pure dom object, this method will return a dom object.
+    
+    let textElement = dab("#text").getElement()
+    //Like this: document.querySelector("#text")
+
+    //It can be shorter when you use other shortcut
+    docSelect("#text")
+    docId("text")
+<br />
+
+### getElements
+If you need a pure dom objects, this method will return a dom objects.
+    
+    let elements = dab("div").getElements()
+    //Like this: document.querySelectorAll("div")
+
+    //It can be shorter when you use other shortcut
+    docSelects("div")
+<br />
+
+### toArray
+If you want to get multiple selected DOM elements as array.
+
+    let arrayElements = dab("div").toArray()
+    
+    //Like this:
+    let arrayElements = Array.from(document.querySelectorAll("div"))
+
+## map
+If you want to map multiple selected DOM elements.
+
+    dab("div").map(item => {
+        ...
+    });
+
+    //Like this:
+    Array.from(document.querySelectorAll("div")).map(item => {
+        ...
+    });
+
+
+
+# More to come...

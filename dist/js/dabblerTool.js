@@ -1,22 +1,3 @@
-// QUICK SELECTORS --------------------------------------------------------------------------------------------------- :
-function docSelect(selector){
-    return document.querySelector(selector)
-}
-
-
-function docSelects(selector){
-    return document.querySelectorAll(selector)
-}
-
-
-function docId(id){
-    return document.getElementById(id);
-}
-
-
-
-
-// TOOLS FUNCTIONS --------------------------------------------------------------------------------------------------- :
 function isNumeric(num){
     let value1 = num.toString();
     let value2 = parseFloat(num).toString();

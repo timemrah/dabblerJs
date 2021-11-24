@@ -223,7 +223,22 @@ class dabblerDom {
 }
 
 
-// QUICK USE
+// SOME SHORTCUTS :
 function dab(selector){
     return new dabblerDom(selector)
+}
+
+
+function docSelect(selector){
+    return document.querySelector(selector)
+}
+
+
+function docSelects(selector){
+    return document.querySelectorAll(selector)
+}
+
+
+function docId(id){
+    return document.getElementById(id);
 }
