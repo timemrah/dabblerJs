@@ -20,31 +20,40 @@
 
 <!-- VIEW -->
 
-<div id="logo-wrapper">
-    <img id="logo" src="../../resource/logo.png" />
-    <h1>DabblerJs</h1>
-    <p class="lead">A novice library</p>
-</div>
 
-<form id="calculator-form">
-    <div class="line">
-        <input class="form-control" name="num1" id="num1" type="number"/>
-    </div>
-    <div class="line">
-        <input class="form-control" name="num2" id="num2" type="number"/>
-    </div>
-    <div class="line">
-        <div id="result"></div>
+<section>
+
+    <div id="logo-wrapper">
+        <img id="logo" src="../../resource/logo.png" />
     </div>
 
-    <div id="button-wrapper">
-        <button class="btn btn-primary" id="addition" name="submit-btn" value="addition">Addition</button>
-        <button class="btn btn-warning" id="multiplication" name="submit-btn" value="multiplication">Multiplication</button>
+    <div id="header">
+        <h1>DabblerJs</h1>
+        <p class="lead">A novice library</p>
     </div>
 
+    <form id="calculator-form">
+        <h4>Calculator</h4>
+        <div class="line">
+            <input class="form-control" name="num1" type="number"/>
+        </div>
+        <div class="line">
+            <input class="form-control" name="num2" type="number"/>
+        </div>
+        <div class="button-line">
+            <button class="btn btn-primary" name="submit-btn" value="addition">+</button>
+            <button class="btn btn-primary" name="submit-btn" value="subtraction">-</button>
+            <button class="btn btn-primary" name="submit-btn" value="multiplication">x</button>
+            <button class="btn btn-primary" name="submit-btn" value="division">/</button>
+        </div>
+        <div class="result-line">
+            <span id="result"></span>
+            <span id="process-icon"></span>
+        </div>
+    </form>
+    <!-- /VIEW -->
 
-</form>
-<!-- /VIEW -->
+</section>
 
 
 <script src="script.js"></script>

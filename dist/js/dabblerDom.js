@@ -1,11 +1,17 @@
 class dabblerDom {
 
 
+    submitBtn = null
+
+
     constructor(selector){
-        switch (selector.constructor.name){
-            case "String"         : this.selectedItems    = document.querySelectorAll(selector); break;
-            case "HTMLFormElement": this.selectedItems[0] = selector; break;
-            case "dabblerDom"      : this.selectedItems    = selector.getElements(); break;
+        if(dabblerDom.#isElement(selector)){
+            this.selectedItems = [selector];
+        } else{
+            switch (selector.constructor.name){
+                case "String"     : this.selectedItems = document.querySelectorAll(selector); break;
+                case "dabblerDom" : this.selectedItems = selector.getElements(); break;
+            }
         }
     }
 
@@ -20,11 +26,18 @@ class dabblerDom {
     }
 
 
-    toArray(){ return Array.from(this.selectedItems) }
+    find(selector){
+        this.selectedItems = this.selectedItems[0].querySelectorAll(selector)
+    }
+
+
+    toArray(){
+        return Array.from(this.selectedItems)
+    }
 
 
     map(callback){
-        return this.toArray().map(callback);
+        return this.toArray().map(callback)
     }
 
 
@@ -78,7 +91,7 @@ class dabblerDom {
 
 
     formData(){
-        return dabblerDom.#createFormData(this.selectedItems[0]);
+        return this.#createFormData(this.selectedItems[0]);
     }
 
 
@@ -98,7 +111,7 @@ class dabblerDom {
     submit(callback){
         this.selectedItems.forEach(item => {
             item.addEventListener('submit', e => {
-                callback(e, item, dabblerDom.#createFormData(item))
+                callback(e, item, this.#createFormData(item))
             });
         })
         return this;
@@ -106,22 +119,45 @@ class dabblerDom {
 
 
     //It also adds the values of the buttons to the form data.
-    submitByBtn(clickCall, submitCall){
+    submitByBtn(callback){
+
         this.selectedItems.forEach(form => {
 
-            let buttons = form.querySelectorAll('button');
-            form.addEventListener('submit', submitCall);
-
-            buttons.forEach(btn => {
+            let submitButtons = form.querySelectorAll('button');
+            submitButtons.forEach(btn => {
+                if(['button', 'reset'].indexOf(btn.type) !== -1){ return; }
                 btn.addEventListener('click', e => {
-                    const formData = dabblerDom.#createFormData(form);
-                    formData.set("click-name", btn.name)
-                    formData.set("click-value", btn.value)
-                    clickCall(e, btn, formData, form)
+                    form.submitBtn = btn
+                    this.submitBtn = btn
                 })
+            })
+
+            let submitInput = form.querySelectorAll('input[type="submit"]');
+            submitInput.forEach(input => {
+                input.addEventListener('click', e => {
+                    this.submitBtn = input
+                    form.submitBtn = input
+                })
+            })
+
+            form.addEventListener('submit', e => {
+                callback(e, form, this.#createFormData(form))
             });
+
         })
+
+
         return this;
+    }
+
+
+    submitByBtnPreventDef(callback){
+
+        this.submitByBtn((e, form, formData) => {
+            e.preventDefault();
+            callback(e, form, formData);
+        });
+
     }
     // EVENTS //
 
@@ -129,9 +165,13 @@ class dabblerDom {
 
 
     // PRIVATE :
-    static #createFormData(formItem){
+    #createFormData(formItem){
 
         const formData = new FormData(formItem);
+
+        if(this.submitBtn){
+            formData.set(this.submitBtn.name, this.submitBtn.value)
+        }
 
         formData.getEntries = function(){
             const entriesArray = [];
@@ -156,10 +196,27 @@ class dabblerDom {
         return formData;
     }
 
+
     static #isNumeric(num){
         let value1 = num.toString();
         let value2 = parseFloat(num).toString();
         return (value1 === value2);
+    }
+
+
+    static #isElement(obj) {
+        try {
+            //Using W3 DOM2 (works for FF, Opera and Chrome)
+            return obj instanceof HTMLElement;
+        }
+        catch(e){
+            //Browsers not supporting W3 DOM2 don't have HTMLElement and
+            //an exception is thrown and we end up here. Testing some
+            //properties that all elements have (works on IE7)
+            return (typeof obj==="object") &&
+                (obj.nodeType===1) && (typeof obj.style === "object") &&
+                (typeof obj.ownerDocument ==="object");
+        }
     }
     // PRIVATE //
 
